@@ -7,7 +7,7 @@ pipeline {
         }
         
         tools{
-            nodejs 'nodejs-15.14.4'
+            nodejs 'nodejs-14.15.4'
         }
         stages {
             stage('Setup') {
