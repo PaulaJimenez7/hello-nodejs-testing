@@ -18,7 +18,7 @@ pipeline {
                 }
                 post{
                     success{
-                        archiveArtifacts 'build/coverage/*.json'
+                        archiveArtifacts 'coverage/*.json'
                     }
                 }
             }
