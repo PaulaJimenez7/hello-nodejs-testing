@@ -16,6 +16,11 @@ pipeline {
                         sh 'npm run test'
                     }
                 }
+                post{
+                    success{
+                        archiveArtifacts 'build/coverage/*.json'
+                    }
+                }
             }
         }
 }
