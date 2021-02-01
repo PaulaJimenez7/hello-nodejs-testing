@@ -1,25 +1,21 @@
 #!/usr/bin/env groovy
-pipeline {
-    agent any 
-    options {
-        ansiColor('xterm')
-    }
 
-    stages{
-        stage('Dependencias'){
-            steps{
-                sh 'yarn'
+pipeline {
+    agent any
+        stages {
+            stage('Setup') {
+                steps {
+                    nodejs(nodeJSInstallationName: 'nodejs-6.14.10') {
+                        sh 'npm install'
+                    }
+                }
+            }
+            stage('Build') {
+                steps {
+                    nodejs(nodeJSInstallationName: 'nodejs-6.14.10') {
+                        sh 'npm run test'
+                    }
+                }
             }
         }
-        stage('test'){
-            steps{
-                sh 'yarn run test'
-            }
-        }
-        stage('ci-test'){
-            steps{
-                sh 'yarn run ci-test'
-            }
-        }
-    }  
 }
