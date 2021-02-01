@@ -31,7 +31,7 @@ pipeline {
                     sh 'npm run ci-test'
                 }
                 post{
-                    success{
+                    always{
                         archiveArtifacts 'test.tap'
                         step([$class: "TapPublisher", testResults: "test.tap"])
                         step([
