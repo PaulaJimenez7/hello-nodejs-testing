@@ -26,7 +26,7 @@ pipeline {
                     }
                 }
             }
-            stage('test-ci') {
+            /*stage('test-ci') {
                 steps {
                     sh 'npm run ci-test'
                 }
@@ -44,6 +44,16 @@ pipeline {
                         ])
                     }
                 }
+            }*/
+            stage("trivy"){
+            steps{
+                sh 'trivy filesystem --format json --output results.json .'
             }
+            post{
+                always{
+                    recordIssues(tools: [trivy(pattern: 'results.json')])
+                }
+            }
+        }
         }
 }
